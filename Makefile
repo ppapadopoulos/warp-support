@@ -39,7 +39,7 @@ help:
 $(RPMDIRS):
 	mkdir $@
 
-rpms: $(MYBOOTPACKS) $(MYPACKS)
+rpms: udtrpm $(MYBOOTPACKS) $(MYPACKS)
 
 $(MYPACKS): $(RPMDIRS)
 	(TGT=$(filter $@%,$(ALLPACKS)); 								\
