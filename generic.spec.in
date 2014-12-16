@@ -1,0 +1,36 @@
+%define _topdir %(echo $PWD)/
+%define PYVERSION 2
+%define MODULE module
+%define PYMODULE opt-python
+%define PYTHON python%{PYVERSION}
+
+Summary: opt-%{PYTHON}-@TGT@
+Name: opt-%{PYTHON}-@TGT@
+Version: @VERSION@ 
+Release: 1
+License: Python 
+Vendor: UCSD 
+Group: System Environment/Base
+Source: @TGT@-%{version}.tar.gz
+AutoReqProv: no
+
+%description
+opt-@TGT@-%{PYVERSION}
+%prep
+%setup -n @TGT@-%{version} 
+%build
+printf "\n\n\n### build ###\n\n\n"
+%{MODULE} load %{PYMODULE}
+%{PYTHON} setup.py build
+%{MODULE} unload %{PYMODULE}
+
+%install
+printf "\n\n\n### install ###\n\n\n"
+%{MODULE} load %{PYMODULE}
+%{PYTHON} setup.py install --root=$RPM_BUILD_ROOT
+%{MODULE} unload %{PYMODULE}
+
+
+%files 
+/
+
